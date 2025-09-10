@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Invic Muse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a23;
+            color: #e6e6e6;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Starry Night Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #0a0a23 100%);
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .stars::before,
+        .stars::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .stars::before {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.3"/></svg>') repeat;
+            animation: twinkle 20s linear infinite;
+        }
+
+        .stars::after {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"><circle cx="75" cy="75" r="2" fill="white" opacity="0.5"/></svg>') repeat;
+            animation: twinkle 30s linear infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; transform: translateY(-10px); }
+        }
+
+        header {
+            background: rgba(10, 10, 35, 0.8);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav h2 {
+            font-family: 'Inter', sans-serif;
+            color: #e6c7a9;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: #e6e6e6;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e6c7a9;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 10, 35, 0.6), rgba(10, 10, 35, 0.6)), url('jalmahal.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 3.5rem;
+            color: #e6e6e6;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            font-weight: 700;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 2rem;
+            color: #e6c7a9;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .gallery img {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact input,
+        .contact textarea {
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #e6c7a9;
+            color: #e6e6e6;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .contact input:focus,
+        .contact textarea:focus {
+            outline: none;
+            border-color: #fff;
+        }
+
+        .contact button {
+            background: #e6c7a9;
+            color: #0a0a23;
+            padding: 0.8rem;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact button:hover {
+            background: #fff;
+        }
+
+        footer {
+            background: rgba(10, 10, 35, 0.9);
+            color: #e6e6e6;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 35, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #e6e6e6;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .gallery img {
+                max-width: 100%;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <header>
+        <nav>
+            <h2>Eternal Invic Muse</h2>
+            <div>
+                <a href="#home">Home</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Eternal Invic Muse</h1>
+    </section>
+
+    <section id="gallery" class="section gallery">
+        <h2>Gallery</h2>
+        <img src="jalmahal.jpg" alt="Featured Photo">
+    </section>
+
+    <section id="contact" class="section contact">
+        <h2>Contact</h2>
+        <form action="https://formspree.io/f/yourformid" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Eternal Invic Muse. All rights reserved.</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
+
+    <script>
+        // Smooth scrolling for nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Lightbox functionality
+        const galleryImage = document.querySelector('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        if (galleryImage) {
+            galleryImage.addEventListener('click', () => {
+                lightboxImg.src = galleryImage.src;
+                lightbox.style.display = 'flex';
+            });
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+        }
+
+        // Close lightbox on click outside image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // Infinite scroll simulation
+        let photoCount = 1;
+        const gallery = document.getElementById('gallery');
+
+        function addMorePhotos() {
+            // Placeholder for more photos (reuses photo1.jpg until you add more)
+            const newImg = document.createElement('img');
+            newImg.src = 'photo1.jpg';
+            newImg.alt = `Featured Photo ${++photoCount}`;
+            newImg.style.maxWidth = '600px';
+            newImg.style.width = '100%';
+            newImg.style.height = 'auto';
+            newImg.style.objectFit = 'cover';
+            newImg.style.cursor = 'pointer';
+            newImg.addEventListener('click', () => {
+                lightboxImg.src = newImg.src;
+                lightbox.style.display = 'flex';
+            });
+            gallery.appendChild(newImg);
+        }
+
+        // Trigger loading more photos when scrolling near bottom
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+                addMorePhotos();
+            }
+        });
+    </script>
+</body>
+</html>
